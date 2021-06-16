@@ -1,0 +1,230 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+     {% if session['innings_no'] ==2 %}
+     <span class="d-block p-2 bg-info text-white">Target = {{table.query.filter_by(match_id =session['match_id'] , innings_no =
+        session['innings_no']).first().target}}
+        &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
+        Required {{table.query.filter_by(match_id =session['match_id'] , innings_no =
+        session['innings_no']).first().target - table.query.filter_by(match_id =session['match_id'] , innings_no =
+        session['innings_no']).first().total_score }}&nbsp;&nbsp; From {{(table.query.filter_by(match_id =session['match_id'] , innings_no =
+        session['innings_no']).first().total_overs)*6 - (table.query.filter_by(match_id =session['match_id'] , innings_no =
+        session['innings_no']).first().overs_completed)*6}}
+
+    </span>
+
+     {% endif %}
+
+    <span class="d-block p-2 bg-dark text-white">{{session['teamA']}}&nbsp;&nbsp;&nbsp; v/s &nbsp;&nbsp;
+        {{session['teamB']}}
+        &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
+        {{session['innings_no']}} Innings
+        &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        Score = {{table.query.filter_by(match_id =session['match_id'] , innings_no =
+        session['innings_no']).first().total_score}}
+        / {{table.query.filter_by(match_id =session['match_id'] , innings_no =
+        session['innings_no']).first().wickets_fallen}}
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Overs = {{table.query.filter_by(match_id =session['match_id'] , innings_no =
+        session['innings_no']).first().overs_completed}}
+        /{{table.query.filter_by(match_id =session['match_id'] , innings_no =
+        session['innings_no']).first().total_overs}}
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Over BAlls = {{table.query.filter_by(match_id =session['match_id'] , innings_no =
+        session['innings_no']).first().over_balls}}
+    </span>
+    <br>
+    <span class="d-block p-2 bg-info text-white">{{session['toss_won'] }} won the tos and choosed to
+        {{session["toss_result"]}} First !..</span>
+    <br>
+    <form method="POST" action="/live_score">
+
+        <div class="col-md-50">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value=1 id="flexCheckChecked" name="mycheckbox">
+                <label class="form-check-label" for="flexCheckDefault">
+                    Wide
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value=2 id="flexCheckChecked" name="mycheckbox">
+                <label class="form-check-label" for="flexCheckChecked">
+                    No Ball
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value=3 id="flexCheckChecked" name="mycheckbox">
+                <label class="form-check-label" for="flexCheckChecked">
+                    Byes
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value=4 id="flexCheckChecked" name="mycheckbox">
+                <label class="form-check-label" for="flexCheckChecked">
+                    Leg Byes
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value=5 id="flexCheckChecked" name="mycheckbox">
+                <label class="form-check-label" for="flexCheckChecked">
+                    Wicket
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value=6 id="flexCheckChecked" name="mycheckbox">
+                <label class="form-check-label" for="flexCheckChecked">
+                    Retire
+                </label>
+            </div>
+        </div>
+        <br>
+
+
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="striker" value="1" required>
+            <label class="form-check-label" for="flexRadioDefault1">
+                {{session['striker']}}
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="striker" value="2" required>
+            <label class="form-check-label" for="flexRadioDefault2">
+                {{session['non_striker']}}
+            </label>
+        </div>
+
+        <br>
+        <button type="submit" class="btn btn-outline-primary" name="run" value=0>0</button>
+        <button type="submit" class="btn btn-outline-secondary" name="run" value=1>1</button>
+        <button type="submit" class="btn btn-outline-success" name="run" value=2>2</button>
+        <button type="submit" class="btn btn-outline-danger" name="run" value=3>3</button>
+        <button type="submit" class="btn btn-outline-warning" name="run" value=4>4</button>
+        <button type="submit" class="btn btn-outline-info" name="run" value=5>5</button>
+        <button type="submit" class="btn btn-outline-primary" name="run" value=6>6</button>
+
+        <br>
+        <br>
+
+
+    </form>
+</div>
+
+<div class="container">
+
+    <table class="table table-hover table-borderless table-light my-4">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">BatsMan Name</th>
+                <th scope="col">Runs</th>
+                <th scope="col">Balls</th>
+                <th scope="col">4's</th>
+                <th scope="col">6's</th>
+                <th scope="col">Strike Rate</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <th scope="row">{{table1.query.filter_by(batsman_name = session['striker']).first().batsman_name}}</th>
+                <td>{{table1.query.filter_by(batsman_name = session['striker']).first().runs}}</td>
+                <td>{{table1.query.filter_by(batsman_name = session['striker']).first().balls}}</td>
+                <td>{{table1.query.filter_by(batsman_name = session['striker']).first().fours}}</td>
+                <td>{{table1.query.filter_by(batsman_name = session['striker']).first().sixes}}</td>
+                <td>{{table1.query.filter_by(batsman_name = session['striker']).first().strike_rate}}</td>
+            </tr>
+            <tr>
+
+            </tr>
+            <th scope="row">{{table1.query.filter_by(batsman_name = session['non_striker']).first().batsman_name}}</th>
+            <td>{{table1.query.filter_by(batsman_name = session['non_striker']).first().runs}}</td>
+            <td>{{table1.query.filter_by(batsman_name = session['non_striker']).first().balls}}</td>
+            <td>{{table1.query.filter_by(batsman_name = session['non_striker']).first().fours}}</td>
+            <td>{{table1.query.filter_by(batsman_name = session['non_striker']).first().sixes}}</td>
+            <td>{{table1.query.filter_by(batsman_name = session['non_striker']).first().strike_rate}}</td>
+        </tbody>
+    </table>
+</div>
+
+<br>
+<div class="container">
+    <table class="table table-hover my-4">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Over No</th>
+                <th scope="col">Bowler Name</th>
+                <th scope="col">Over Timeline</th>
+                <th scope="col">Over Score</th>
+                <th scope="col">Balls</th>
+                <th scope="col">Over Wickets</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">{{table2.query.order_by(table2.over_no.desc()).first().over_no}}</th>
+                <td>{{table2.query.order_by(table2.over_no.desc()).first().bowler_name}}</td>
+                <td>{{table2.query.order_by(table2.over_no.desc()).first().over_timeline}}</td>
+                <td>{{table2.query.order_by(table2.over_no.desc()).first().over_score}}</td>
+                <td>{{table2.query.order_by(table2.over_no.desc()).first().balls_count}}</td>
+                <td>{{table2.query.order_by(table2.over_no.desc()).first().over_wickets}}</td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}
+
+{% block content1 %}
+
+<div class="container">
+    <table class="table table-hover my-4">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Fall of Wickets</th>
+                <th scope="col">Time of Fall</th>
+                <th scope="col">Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in table4.query.all() %}
+            <tr>
+                <th scope="row">{{row['batsman_name']}}</th>
+                <td>{{row['over']}}</td>
+                <td>{{row['score']}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock content1 %}
+
+{% block content2 %}
+
+<div class="container">
+    <table class="table table-hover my-4">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Batsman</th>
+                <th scope="col">Timeline</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">{{table1.query.filter_by(batsman_name = session['striker']).first().batsman_name}}</th>
+                <td>{{table1.query.filter_by(batsman_name = session['striker']).first().batting_timeline}}</td>
+            </tr>
+            <tr>
+                <th scope="row">{{table1.query.filter_by(batsman_name = session['non_striker']).first().batsman_name}}
+                </th>
+                <td>{{table1.query.filter_by(batsman_name = session['non_striker']).first().batting_timeline}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+{% endblock content2 %}
+
+
+
+

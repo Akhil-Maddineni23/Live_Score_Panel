@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+    <form method="POST" action="/new_bowler">
+        <span class="d-block p-2 bg-info text-white">Over Complted!..Enter the bowler name who is Going to Bowl NExt!..</span>
+        <br>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Enter New Bowler Name" name="new_bowler" required>
+        </div>
+        <br>
+        <button class="btn btn-primary" type="submit">Submit</button>
+
+    </form>
+</div>
+{% endblock content %}

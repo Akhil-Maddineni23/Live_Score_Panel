@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section">
+    <form method="POST" action="/new_match">
+        
+        <fieldset class="form-group">
+            <span class="d-block p-2 bg-info text-white">Let's Start a New Match!..</span>
+            <br>
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Match id</span>
+                    <input type="text" class="form-control" placeholder="Enter some unique Match id" name="match_id" required>
+                </div>
+               
+            </div>
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Team A</span>
+                    <input type="text" class="form-control" placeholder="Enter Team A Name" name="team1" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Team B</span>
+                    <input type="text" class="form-control" placeholder="Enter Team B Name" name="team2" required>
+                </div>
+               
+            </div>
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Overs</span>
+                    <input type="text" class="form-control" placeholder="Enter no of over of Play" name="overs" required>
+                </div>
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Toss Won</span>
+                    <input type="text" class="form-control" placeholder="Team who won the Toss ??" name="toss_won" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Toss Result</span>
+                    <input type="text" class="form-control" placeholder="Choose to Bat/Ball ??" name="toss_result" required>
+                </div>
+            </div>
+            
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit">Create New MAtch</button>
+        </div>
+    </form>
+</div>
+
+{% endblock content %}

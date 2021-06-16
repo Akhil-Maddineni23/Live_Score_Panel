@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+    <span class="d-block p-2 bg-dark text-white">{{session['teamA']}}&nbsp;&nbsp;&nbsp; v/s &nbsp;&nbsp;
+        {{session['teamB']}}
+        &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+        {{session['innings_no']}} Innings
+        &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Score = {{table.query.filter_by(match_id =session['match_id'] , innings_no =
+        session['innings_no']).first().total_score}}
+        / {{table.query.filter_by(match_id =session['match_id'] , innings_no =
+        session['innings_no']).first().wickets_fallen}}
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Overs = {{table.query.filter_by(match_id =session['match_id'] , innings_no =
+        session['innings_no']).first().overs_completed}}
+        /{{table.query.filter_by(match_id =session['match_id'] , innings_no =
+        session['innings_no']).first().total_overs}}
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Over BAlls = {{table.query.filter_by(match_id =session['match_id'] , innings_no =
+        session['innings_no']).first().over_balls}}
+    </span>
+    <br>
+    <span class="d-block p-2 bg-info text-white">{{session['toss_won'] }} won the tos and choosed to
+        {{session["toss_result"]}} First !..</span>
+    <br>
+
+</div>
+
+<div class="container">
+    <span class="d-block p-2 bg-info text-white">Innings Completed</span>
+
+    <form method="POST" action="/innings_completed">
+        <span class="d-block p-2 bg-info text-white">Tab Continue to Play 2nd Innings!..</span>
+        <br>
+        <button class="btn btn-primary" type="submit">Continue</button>
+
+    </form>
+</div>
+
+{% endblock content %}

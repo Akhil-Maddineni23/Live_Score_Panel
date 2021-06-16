@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section">
+    <form method="POST" action="/innings_start">
+       
+        <fieldset class="form-group">
+            <span class="d-block p-2 bg-info text-white">Let's Begin our Innings!..</span>
+            <br>
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Striker Name</span>
+                    <input type="text" class="form-control" placeholder="Enter striker Name" name="striker" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Non Striker Name</span>
+                    <input type="text" class="form-control" placeholder="Enter non striker name" name="non_striker" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Strike Bowler</span>
+                    <input type="text" class="form-control" placeholder="Enter striker bowler name" name="strike_bowler" required>
+                </div>
+            </div>
+           
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit">Let's PLay</button>
+        </div>
+    </form>
+</div>
+
+{% endblock content %}
