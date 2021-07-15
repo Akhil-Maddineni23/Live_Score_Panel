@@ -8,16 +8,16 @@ from flaskblog.forms import New_Match_Create_Form, Innings_Start
 
 posts = [
     {
-        'author': 'Corey Schafer',
-        'title': 'Blog Post 1',
-        'content': 'First post content',
-        'date_posted': 'April 20, 2018'
+        'author': 'Harsha Bhoglae',
+        'title': 'Is Rohit the Best Ipl cpatain Ever ??',
+        'content': 'Yesss!..He is the best captain because he places team infornt of him.',
+        'date_posted': 'April 20, 2020'
     },
     {
-        'author': 'Jane Doe',
-        'title': 'Blog Post 2',
-        'content': 'Second post content',
-        'date_posted': 'April 21, 2018'
+        'author': 'Sunil Gavaskar',
+        'title': 'Icc Test Campionship ??',
+        'content': 'India vs New Zealand',
+        'date_posted': 'April 20, 2020'
     }
 ]
 
